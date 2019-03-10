@@ -1,0 +1,41 @@
+.sequence {
+  display: inline-block;
+}
+
+.peg {
+  border: #000 solid 1px;
+  border-radius:1.4em;
+  display: inline-block;
+  margin-left: 4px;
+  margin-right: 4px;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  min-height: 3em;
+}
+
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.green {
+  background-color: green;
+}
+.yellow {
+  background-color: yellow;
+}
+.purple {
+  background-color: purple;
+}
+.orange {
+  background-color: orange;
+}
+
+.picker {
+  margin: .4em;
+}
+
+.picker>.color:hover {
+  cursor: grab;
+}

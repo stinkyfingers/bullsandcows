@@ -1,0 +1,19 @@
+.bulls,.cows {
+  margin: .4em .2em .4em .2em;
+  padding: .2em;
+  border: #eee solid 1px;
+  border-radius: 4px;
+}
+
+.bulls {
+  background-color: #efe;
+}
+
+.cows {
+  background-color: #ffe;
+}
+
+.result, .roundLabel {
+  margin: .4em;
+  font-size: 1.5em;
+}
