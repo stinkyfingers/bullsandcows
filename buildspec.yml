@@ -12,6 +12,10 @@ phases:
       - npm run build
   post_build:
     commands:
+      - aws iam get-user
+      - aws iam list-roles
+      - aws iam list-policies
+      - aws iam get-role-policy --policy-name bullsandcows_pipeline_policy --role-name bullsandcows_pipeline_role
       - aws s3 sync build/ s3://bullsandcows.john-shenk.com
 artifacts:
   files:
