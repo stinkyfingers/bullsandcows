@@ -81,6 +81,50 @@ resource "aws_iam_role_policy" "bullsandcows" {
 EOF
 }
 
+# resource "aws_iam_role" "codebuild-bullsandcows-service-role" {
+#   name = "codebuild-bullsandcows-service-role"
+#   assume_role_policy = <<EOF
+# {
+#   "Version":"2012-10-17",
+#   "Statement":[
+#     {
+#       "Effect":"Allow",
+#       "Principal":{
+#         "Service":"codebuild.amazonaws.com"
+#       },
+#       "Action":"sts:AssumeRole"
+#     }
+#   ]
+# }
+# EOF
+# }
+
+resource "aws_iam_role_policy" "bullsandcows-service-policy" {
+  name = "bullsandcows_service_policy"
+  # role = "${aws_iam_role.codebuild-bullsandcows-service-role.id}"
+  role = "codebuild-bullsandcows-service-role"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect":"Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:List*",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "${aws_s3_bucket.bullsandcows.arn}",
+        "${aws_s3_bucket.bullsandcows.arn}/*"
+      ]
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_codepipeline" "bullsandcows" {
   name     = "bullsandcows"
   role_arn = "${aws_iam_role.bullsandcows.arn}"
