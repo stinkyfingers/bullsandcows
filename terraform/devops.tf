@@ -52,15 +52,9 @@ resource "aws_iam_role_policy" "bullsandcows" {
     {
       "Effect":"Allow",
       "Action": [
-<<<<<<< HEAD
         "s3:Get*",
         "s3:List*",
         "s3:PutObject"
-=======
-        "s3:GetObject",
-        "s3:GetObjectVersion",
-        "s3:GetBucketVersioning"
->>>>>>> d5e832f3ee8dba5e6fae3888cc76646c34e37d48
       ],
       "Resource": [
         "${aws_s3_bucket.bullsandcows.arn}",
