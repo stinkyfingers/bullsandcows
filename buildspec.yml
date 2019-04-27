@@ -3,10 +3,16 @@ version: 0.2
 phases:
   install:
     commands:
-      - npm install
+      - npm i npm@latest -g
+  pre_build:
+    commands:
+      - npm i
   build:
     commands:
       - npm run build
+  post_build:
+    commands:
+      - aws s3 sync build/ s3://bullsandcows.john-shenk.com
 artifacts:
   files:
     - 'build/*'
