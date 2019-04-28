@@ -149,7 +149,7 @@ resource "aws_codepipeline" "bullsandcows" {
         Owner  = "stinkyfingers"
         Repo   = "bullsandcows"
         Branch = "master"
-        OAuthToken = "a0b91e5aeb89087941a5dc4e35114f648929a3bd"
+        OAuthToken = ""
       }
     }
   }
