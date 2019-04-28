@@ -46,7 +46,10 @@ const game = (state = {}, action) => {
 			}
 			state.ws.send(JSON.stringify({option: 'round', gameId: state.gameId, "sequence": seq}))
 			return Object.assign({}, state, {submitting: true});
-
+		case 'SHOW_RULES':
+			let showRules = 'show';
+			if (action.showRules === 'show') showRules = 'hide';
+      return Object.assign({}, state, {showRules});
     default:
     return state;
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { startGame,  wsconnect, broadcastMessage, setError, setGameId } from '../actions/game';
+import { startGame,  wsconnect, broadcastMessage, setError, setGameId, setShowRules } from '../actions/game';
+import Rules from './rules';
 import '../css/header.css';
 
 class Header extends Component {
@@ -53,6 +54,10 @@ class Header extends Component {
     return (
       <div className="header">
         <button onClick={this.handleClick}>New Game</button>
+        <div className='rules' onClick={() => {this.props.setShowRules(this.props.showRules)}}>
+          <span className="rulesButton">{this.props.showRules === 'show' ? 'HIDE' : 'RULES'}</span>
+        </div>
+        {this.props.showRules === 'show' ? <Rules /> : null}
       </div>
     );
   }
@@ -62,7 +67,8 @@ class Header extends Component {
 const mapStateToProps = state => {
 	return {
     gameId: state.game.gameId,
-    ws: state.game.ws
+    ws: state.game.ws,
+    showRules: state.game.showRules
 	};
 }
 
@@ -71,7 +77,8 @@ const mapDispatchToProps = dispatch => ({
   setGameId: (id) => dispatch(setGameId(id)),
   connect: (onopen) => dispatch(wsconnect(onopen)),
   broadcastMessage: (message) => dispatch(broadcastMessage(message)),
-  seterror: (error) => dispatch(setError(error))
+  seterror: (error) => dispatch(setError(error)),
+  setShowRules: (showRules) => dispatch(setShowRules(showRules))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

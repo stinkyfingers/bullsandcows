@@ -1,3 +1,17 @@
 .header {
   margin: 1em 0 1em 0;
 }
+
+.rulesButton {
+  border-radius: 4px;
+  background-color: #ccc;
+  padding: .4em;
+  font-size: .6em;
+}
+.rules{
+  margin: .2em;
+}
+
+.rulesContainer {
+  margin: 2em;
+}

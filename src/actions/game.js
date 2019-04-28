@@ -38,3 +38,8 @@ exports.submit = (sequence) => ({
   type: 'SUBMIT',
   sequence
 });
+
+exports.setShowRules = (showRules) => ({
+  type: 'SHOW_RULES',
+  showRules
+});
