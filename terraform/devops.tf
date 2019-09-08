@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "bullsandcows" {
   bucket = "bullsandcows.john-shenk.com"
-  acl    = ""
+  acl    = "private"
   force_destroy = false
   website {
     index_document = "index.html"
@@ -25,6 +25,12 @@ resource "aws_s3_bucket_policy" "bullsandcows" {
     ]
 }
 EOF
+}
+
+resource "aws_s3_bucket_public_access_block" "example" {
+  bucket = "${aws_s3_bucket.bullsandcows.id}"
+  block_public_acls   = true
+  block_public_policy = true
 }
 
 resource "aws_iam_role" "bullsandcows" {
