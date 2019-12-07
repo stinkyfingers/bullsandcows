@@ -53,7 +53,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <button onClick={this.handleClick}>New Game</button>
+        <button className='newGame' onClick={this.handleClick}>New Game</button>
         <div className='rules' onClick={() => {this.props.setShowRules(this.props.showRules)}}>
           <span className="rulesButton">{this.props.showRules === 'show' ? 'HIDE' : 'RULES'}</span>
         </div>

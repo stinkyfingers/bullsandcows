@@ -2,12 +2,23 @@
   margin: 1em 0 1em 0;
 }
 
+.newGame:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+
 .rulesButton {
   border-radius: 4px;
   background-color: #ccc;
   padding: .4em;
   font-size: .6em;
 }
+
+.rulesButton:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+
 .rules{
   margin: .2em;
 }

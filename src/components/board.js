@@ -36,7 +36,15 @@ class Board extends Component {
       return (<div className='winner'>You're a Winner!</div>);
     }
     if (this.props.message.concluded) {
-      return (<div className='loser'>Game over. You're a loser!</div>);
+      return (
+        <div className='loser'>
+          <div className='loserText'>Game over. You're a loser!</div>
+          <div className='color' id={`${this.props.message.code[0].color}`}></div>
+          <div className='color' id={`${this.props.message.code[1].color}`}></div>
+          <div className='color' id={`${this.props.message.code[2].color}`}></div>
+          <div className='color' id={`${this.props.message.code[3].color}`}></div>
+        </div>
+      );
     }
     return (<Play />);
   }
