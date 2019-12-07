@@ -82,8 +82,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
-
-  price_class = "PriceClass_All"
 }
 
 resource "aws_route53_record" "bullsandcows" {
