@@ -28,7 +28,7 @@ EOF
 }
 
 resource "aws_s3_bucket_public_access_block" "example" {
-  bucket = "${aws_s3_bucket.bullsandcows.id}"
+  bucket = aws_s3_bucket.bullsandcows.id
   block_public_acls   = true
   block_public_policy = true
 }
@@ -54,7 +54,7 @@ EOF
 
 resource "aws_iam_role_policy" "bullsandcows" {
   name = "bullsandcows_pipeline_policy"
-  role = "${aws_iam_role.bullsandcows.id}"
+  role = aws_iam_role.bullsandcows.id
 
   policy = <<EOF
 {
@@ -108,7 +108,7 @@ resource "aws_codebuild_project" "bullsandcows" {
   name          = "bullsandcows"
   description   = "bullsandcows"
   build_timeout = "5"
-  service_role  = "${aws_iam_role.bullsandcows.arn}"
+  service_role  = aws_iam_role.bullsandcows.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
@@ -116,7 +116,7 @@ resource "aws_codebuild_project" "bullsandcows" {
 
   cache {
     type     = "S3"
-    location = "${aws_s3_bucket.bullsandcows.bucket}"
+    location = aws_s3_bucket.bullsandcows.bucket
   }
 
   environment {
@@ -141,7 +141,7 @@ resource "aws_codebuild_project" "bullsandcows" {
 }
 
 resource "aws_codebuild_webhook" "bullsandcows" {
-  project_name = "${aws_codebuild_project.bullsandcows.name}"
+  project_name = aws_codebuild_project.bullsandcows.name
 }
 
 

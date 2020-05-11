@@ -1,4 +1,4 @@
 variable "oauthtoken" {
-  type = "string"
+  type = string
   default = ""
 }

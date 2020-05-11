@@ -8,8 +8,8 @@ resource "aws_iam_user" "johnshenk" {
 }
 
 provider "github" {
-  token        = "${data.aws_ssm_parameter.github_organization.value}"
-  organization = "${data.aws_ssm_parameter.github_token.value}"
+  token        = data.aws_ssm_parameter.github_organization.value
+  organization = data.aws_ssm_parameter.github_token.value
 }
 
 data "aws_ssm_parameter" "github_organization" {
@@ -31,11 +31,11 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = "${aws_s3_bucket.bullsandcows.bucket_domain_name}"
-    origin_id   = "${local.s3_origin_id}"
+    domain_name = aws_s3_bucket.bullsandcows.bucket_domain_name
+    origin_id   = local.s3_origin_id
 
     s3_origin_config {
-      origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
   }
 
@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${local.s3_origin_id}"
+    target_origin_id = local.s3_origin_id
 
     forwarded_values {
       query_string = false
@@ -78,7 +78,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = "arn:aws:acm:us-east-1:671958020402:certificate/4f5aae32-96c3-4926-ab41-8fb72334470a"
+    acm_certificate_arn = "arn:aws:acm:us-east-1:671958020402:certificate/fc7ab094-b641-4898-8aca-24739e555f73"
     ssl_support_method = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
@@ -90,8 +90,8 @@ resource "aws_route53_record" "bullsandcows" {
   type    = "A"
 
   alias {
-    name                   = "${aws_cloudfront_distribution.s3_distribution.domain_name}"
-    zone_id                = "${aws_cloudfront_distribution.s3_distribution.hosted_zone_id}"
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
     evaluate_target_health = false
   }
 }
